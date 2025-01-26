@@ -1,7 +1,6 @@
 import pytest
 import requests
 
-@pytest.fixture
 def generate_test_input():
     """Fixture to generate test input using Ollama API."""
     def _generate(prompt):
@@ -19,7 +18,6 @@ def generate_test_input():
             return None
     return _generate
 
-@pytest.fixture
 def test_sentiment_api():
     """Fixture to test sentiment prediction API."""
     def _test(input_text):
