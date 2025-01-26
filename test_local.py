@@ -8,11 +8,10 @@ def test_generate_test_input():
         try:
             response = requests.post(
                 ollama_url,
-                json={"model": "llama3.2:latest", "prompt": "why is the sky blue"},
+                json={"model": "llama3.2:latest", "prompt": "why is the sky blue", "stream": "false"},
                 headers={"Content-Type": "application/json"}
             )
             response.raise_for_status()
-            print('response')
             return response.json().get("generated_text", "")
         except requests.exceptions.RequestException as e:
             pytest.fail(f"Error generating data from Ollama: {e}")
