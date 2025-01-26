@@ -1,17 +1,18 @@
 import pytest
 import requests
 
-def generate_test_input():
+def test_generate_test_input():
     """Fixture to generate test input using Ollama API."""
     def _generate(prompt):
-        ollama_url = "http://localhost:8000/generate"
+        ollama_url = "http://localhost:11434/api/generate"
         try:
             response = requests.post(
                 ollama_url,
-                json={"model": "llama3.2:latest", "prompt": prompt},
+                json={"model": "llama3.2:latest", "prompt": "why is the sky blue"},
                 headers={"Content-Type": "application/json"}
             )
             response.raise_for_status()
+            print('response')
             return response.json().get("generated_text", "")
         except requests.exceptions.RequestException as e:
             pytest.fail(f"Error generating data from Ollama: {e}")
